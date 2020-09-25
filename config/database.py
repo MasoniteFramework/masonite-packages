@@ -4,7 +4,6 @@ import logging
 
 from masonite import env
 from masonite.environment import LoadEnvironment
-from orator import DatabaseManager, Model
 
 """Load Environment Variables
 Loads in the environment variables when this page is imported.
@@ -42,15 +41,13 @@ DATABASES = {
         'driver': 'postgres',
         'host': env('DB_HOST'),
         'database': env('DB_DATABASE'),
-        'port': env('DB_PORT'),
         'user': env('DB_USERNAME'),
         'password': env('DB_PASSWORD'),
-        'log_queries': env('DB_LOG'),
+        'port': '5432',
+        'prefix': '',
+        'grammar': 'postgres'
     },
 }
-
-DB = DatabaseManager(DATABASES)
-Model.set_connection_resolver(DB)
 
 
 logger = logging.getLogger('orator.connection.queries')
