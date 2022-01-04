@@ -1,7 +1,9 @@
-"""Web Routes."""
-
-from masonite.routes import Get, Post
+from masonite.routes import Route
 
 ROUTES = [
-    Get('/', 'WelcomeController@show').name('welcome'),
+    Route.get("/", "HomeController@home"),
+    Route.get("/faq", "HomeController@faq"),
+    # packages handling
+    Route.get("/packages", "PackagesController@index").name("packages"),
+    Route.get("/packages/@slug", "PackagesController@details").name("packages.details"),
 ]

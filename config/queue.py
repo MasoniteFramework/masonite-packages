@@ -1,30 +1,31 @@
-"""Queue Settings."""
+from masonite.environment import env
 
-from masonite import env
-
-"""Queue Driver
-Queues are an excellent way to send intensive and time consuming tasks
-into the background to improve performance of your application.
-
-Supported: 'async', 'amqp'
-"""
-
-DRIVER = env('QUEUE_DRIVER', 'async')
-
-"""Queue Drivers
-Put any configuration settings for your drivers in this configuration setting.
-"""
 
 DRIVERS = {
-    'async': {
-        'mode': 'threading'
+    "default": "async",
+    "database": {
+        "connection": "sqlite",
+        "table": "jobs",
+        "failed_table": "failed_jobs",
+        "attempts": 3,
+        "poll": 5,
     },
-    'amqp': {
-        'username': env('QUEUE_USERNAME', 'guest'),
-        'vhost': env('QUEUE_VHOST', ''),
-        'password': env('QUEUE_PASSWORD', 'guest'),
-        'host': env('QUEUE_HOST', 'localhost'),
-        'port': env('QUEUE_PORT', '5672'),
-        'channel': env('QUEUE_CHANNEL', 'default'),
-    }
+    "redis": {
+        #
+    },
+    "amqp": {
+        "username": "guest",
+        "password": "guest",
+        "port": "5672",
+        "vhost": "",
+        "host": "localhost",
+        "channel": "default",
+        "queue": "masonite4",
+    },
+    "async": {
+        "blocking": True,
+        "callback": "handle",
+        "mode": "threading",
+        "workers": 1,
+    },
 }
