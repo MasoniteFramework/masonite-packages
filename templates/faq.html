@@ -2,13 +2,63 @@
 {% block title %}FAQ{% endblock %}
 
 {% block content %}
-<div class="flex flex-col text-white items-center justify-center pt-10">
-  <h1 class="text-5xl mb-4 tracking-wide">
-    FAQ
+<div class="flex flex-col text-white items-center justify-center pt-10 w-full">
+  <h1 class="text-5xl mb-10 tracking-wide">
+    Frequently asked questions
   </h1>
-  <p>How packages are collected ?</p>
-  <p>Why I can't find my package ?</p>
-  <p>...</p>
-
+  <div class="w-full" x-data="accordion(faqQuestions)">
+    <template x-for="(item, index) in questions" :key="index">
+      <div class="py-4 border-t border-gray-700">
+        <div class="flex justify-between items-baseline cursor-pointer" x-on:click="toggle(index)">
+          <h2 class="text-xl mb-2" x-text="item.question"></h2>
+          <svg
+            x-show="index != currentId"
+            xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+          <svg x-show="index == currentId" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+          </svg>
+        </div>
+        <div class="text-gray-400 text-base" x-show="index == currentId" x-collapse x-html="item.answer"></div>
+      </div>
+    </template>
+  </div>
 </div>
+{% endblock %}
+
+{% block js %}
+<script>
+  const faqQuestions = [
+    {
+      question: "How packages are collected ?",
+      answer: `
+      <p>Packages are collected automatically every day from PyPI repository.</p>
+      <p>The package must respect few rules to be listed on this website:</p>
+      <ul class="list-disc ml-8">
+        <li>it must be published on PyPI</li>
+        <li>it should have a <span>Masonite</span> tag in package configuration file</li>
+        <li>it should be approved by a Masonite core contributor (just to avoid fake packages to be listed here)</li>
+      </ul>
+      `
+    },
+    {
+      question: "Why my package is not listed ?",
+      answer: "test 2"
+    },
+    {
+      question: "How can I create a package ?",
+      answer: `
+        <p>Masonite makes it easy to create a package.</p>
+        <p>You can find more information in <a class="faq-link" href="https://docs.masoniteproject.com/features/package-development" target="_blank">Package Development</a> section of official Masonite documentation.</p>
+      `
+    },
+    {
+      question: "How can I contribute to this website ?",
+      answer: `
+        <p>You can contribute by going to the <a class='faq-link' href='https://github.com/girardinsamuel/masonite-packages' target='_blank'>GitHub repository</a> !</p>
+        <p>Feel free to open an issue and a pull request.</p>`
+    }
+  ]
+</script>
 {% endblock %}

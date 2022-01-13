@@ -15,5 +15,9 @@
         "production": "mix --production",
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000"
+    },
+    "dependencies": {
+        "@alpinejs/collapse": "^3.7.1",
+        "alpinejs": "^3.7.1"
     }
 }

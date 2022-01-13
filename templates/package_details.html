@@ -3,4 +3,6 @@
 
 {% block content %}
 <h1 class="text-white">{{ package.name }}</h1>
+
+<p class="text-white">{{ package.description | safe}}</p>
 {% endblock %}

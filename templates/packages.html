@@ -5,7 +5,7 @@
   <div class="grid grid-cols-4 gap-4">
   {% for package in packages %}
     <!-- <a href="{{ url('package.details') }}" class="bg-gray-700 rounded-md p-4 block"> -->
-    <a href="/packages/{{ package.slug }}/" class="bg-gray-700 rounded-md p-4 block">
+    <a href="/packages/{{ package.name }}/" class="bg-gray-700 rounded-md p-4 block">
       <p class="text-white">{{ package.name }}</p>
       {% if package.is_official %}
       <span class="badge badge-green">

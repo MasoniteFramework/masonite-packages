@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+.nav-link {
+  @apply text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium;
+}
+
+.nav-link-active {
+  @apply bg-gray-900 text-white hover:bg-transparent hover:text-white;
+}
+
 .badge {
   @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
 }
@@ -12,4 +20,8 @@
 
 .badge-green {
   @apply bg-green-100 text-green-800;
+}
+
+.faq-link {
+  @apply text-white underline;
 }
