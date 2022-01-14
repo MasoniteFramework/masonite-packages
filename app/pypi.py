@@ -12,8 +12,6 @@ def parse_code_blocks(text):
     for m in matches:
         occurences.append(m.group())
 
-    # ```\ntest
-    # ```python\ntest
     for o in occurences:
         lang = ""
         end = o.find("\n")
@@ -47,12 +45,11 @@ def get_masonite_versions(classifiers):
 
 
 def find_packages():
-    query = "c=Framework+%3A%3A+Masonite"
     packages = []
     status_code = 200
     page = 1
     while status_code != 404:
-        response = requests.get(f'http://pypi.org/search/?{query}&page={page}')
+        response = requests.get(f'http://pypi.org/search/?c=Framework+%3A%3A+Masonite&page={page}')
         status_code = response.status_code
         if status_code == requests.codes.ok:
             packages += parse_search_page(response.text)
