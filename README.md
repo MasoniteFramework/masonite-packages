@@ -2,7 +2,7 @@
 
 Repository of the website used to list all [Masonite](https://github.com/MasoniteFramework/masonite) packages and find a package for your next project !
 
-[!Preview](preview.png)
+![Preview](preview.png)
 
 ## Getting started
 
