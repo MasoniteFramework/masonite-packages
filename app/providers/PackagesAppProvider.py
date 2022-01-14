@@ -10,11 +10,11 @@ class PackagesAppProvider(Provider):
         self.application = application
 
     def register(self):
-    #     self.application.make('scheduler').add(
-    #         AddNewPackages().every_minute()
-    #     )
         self.application.make('scheduler').add(
-            UpdatePackages().every_minute()
+            AddNewPackages().daily_at("09:00")
+        )
+        self.application.make('scheduler').add(
+            UpdatePackages().daily()
         )
         self.application.make("commands").add(ClearPackagesCommand(self.application))
 
