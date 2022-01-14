@@ -1,8 +1,85 @@
 {% extends "base.html" %}
 {% block title %}{{ package.name }}{% endblock %}
 
-{% block content %}
-<h1 class="text-white">{{ package.name }}</h1>
+{% block head %}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/github-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+{% endblock %}
 
-<p class="text-white">{{ package.description | safe}}</p>
+{% block content %}
+<div class="flex items-start justify-between mb-10">
+  <h1 class="text-xl text-white">{{ package.name }}</h1>
+  <div class="flex items-center space-x-2">
+    <a href="{{ package.repository_url }}" class="text-sm bg-gray-800 hover:bg-gray-700 text-white rounded-md p-2">Open
+      repository</a>
+    <a href="{{ package.pypi_url }}" class="text-sm bg-gray-800 hover:bg-gray-700 text-white rounded-md p-2">See on PyPi</a>
+  </div>
+</div>
+
+<div class="flex items-center space-x-2 mb-6">
+  <div class="flex items-center justify-end space-x-4">
+    {% if package.is_official %}
+    <span class="badge badge-green">
+      Official
+    </span>
+    {% else %}
+    <span class="badge badge-yellow">
+      Community
+    </span>
+    {% endif %}
+    <!-- Version -->
+    {% if package.version %}
+    <span class="badge badge-purple">V{{ package.version }}</span>
+    {% endif %}
+    <!-- Stars -->
+    <div class="flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+        <path
+          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+      </svg>
+      <span class="text-sm text-gray-400 ml-1">{{ package.stars }}</span>
+    </div>
+    <!-- Issues -->
+    <div class="flex items-center">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" fill="currentColor"
+        class="h-4 w-4 text-red-500">
+        <path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+        <path fill-rule="evenodd" d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"></path>
+      </svg>
+      <span class="text-sm text-gray-400 ml-1">{{ package.issues }}</span>
+    </div>
+    <!-- License -->
+    <div class="flex items-center">
+      <svg aria-hidden="true" height="16" viewBox="0 0 16 16" version="1.1" width="16" fill="currentColor"
+        class="h-4 w-4 text-gray-500">
+        <path fill-rule="evenodd"
+          d="M8.75.75a.75.75 0 00-1.5 0V2h-.984c-.305 0-.604.08-.869.23l-1.288.737A.25.25 0 013.984 3H1.75a.75.75 0 000 1.5h.428L.066 9.192a.75.75 0 00.154.838l.53-.53-.53.53v.001l.002.002.002.002.006.006.016.015.045.04a3.514 3.514 0 00.686.45A4.492 4.492 0 003 11c.88 0 1.556-.22 2.023-.454a3.515 3.515 0 00.686-.45l.045-.04.016-.015.006-.006.002-.002.001-.002L5.25 9.5l.53.53a.75.75 0 00.154-.838L3.822 4.5h.162c.305 0 .604-.08.869-.23l1.289-.737a.25.25 0 01.124-.033h.984V13h-2.5a.75.75 0 000 1.5h6.5a.75.75 0 000-1.5h-2.5V3.5h.984a.25.25 0 01.124.033l1.29.736c.264.152.563.231.868.231h.162l-2.112 4.692a.75.75 0 00.154.838l.53-.53-.53.53v.001l.002.002.002.002.006.006.016.015.045.04a3.517 3.517 0 00.686.45A4.492 4.492 0 0013 11c.88 0 1.556-.22 2.023-.454a3.512 3.512 0 00.686-.45l.045-.04.01-.01.006-.005.006-.006.002-.002.001-.002-.529-.531.53.53a.75.75 0 00.154-.838L13.823 4.5h.427a.75.75 0 000-1.5h-2.234a.25.25 0 01-.124-.033l-1.29-.736A1.75 1.75 0 009.735 2H8.75V.75zM1.695 9.227c.285.135.718.273 1.305.273s1.02-.138 1.305-.273L3 6.327l-1.305 2.9zm10 0c.285.135.718.273 1.305.273s1.02-.138 1.305-.273L13 6.327l-1.305 2.9z">
+        </path>
+      </svg>
+      <span class="text-sm text-gray-400 ml-1">{{ package.license }}</span>
+    </div>
+  </div>
+</div>
+<div  class="flex justify-center my-6" x-data>
+  <div class="text-base bg-gray-900 text-white rounded-md pl-4 pr-2 py-3 inline-flex items-center justify-between space-x-4">
+    <p>pip install {{ package.name }}</p>
+    <svg x-on:click="$clipboard('pip install {{ package.name }}')" xmlns="http://www.w3.org/2000/svg"
+      class="cursor-pointer h-5 w-5 text-gray-600 stroke-current" fill="none" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+    </svg>
+  </div>
+</div>
+
+<div class="mx-auto max-w-4xl">
+  <div
+    class="readme prose prose-invert max-w-none prose-code:bg-gray-900 prose-code:after:content-[none] prose-code:before:content-[none] prose-code:p-1 prose-code:text-sm prose-code:rounded-md prose-code:text-white"
+  >
+    {{ package.description | safe }}
+  </div>
+  <p class="text-gray-500 mt-6 text-sm text-left">Dernière mise à jour des informations le : {{ package.updated_at }}</p>
+</div>
+
+
+<script>hljs.highlightAll();</script>
 {% endblock %}

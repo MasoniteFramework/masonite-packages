@@ -37,14 +37,27 @@
       <p>The package must respect few rules to be listed on this website:</p>
       <ul class="list-disc ml-8">
         <li>it must be published on PyPI</li>
-        <li>it should have a <span>Masonite</span> tag in package configuration file</li>
-        <li>it should be approved by a Masonite core contributor (just to avoid fake packages to be listed here)</li>
+        <li>it should have the <span class="highlight-tag">Framework :: Masonite</span> PyPi specifier in package configuration</li>
       </ul>
+      <p>You can add the specifier in <span class="highlight-tag">setup.py</span>, <span class="highlight-tag">pyproject.toml</span> or <span class="highlight-tag">setup.cfg</span> configuration file.</p>
       `
     },
     {
       question: "Why my package is not listed ?",
-      answer: "test 2"
+      answer: `<p>Packages are collected once a day so if you just published your package you will need to wait a day at max.</p>
+      <p>Also be sure to read the above item on package collection.</p>`
+    },
+    {
+      question: "Why my package data is up to date ?",
+      answer: `<p>Packages metadata are updated once a day so if you have just updated your package you will need to wait a day at max to see the updates deployed here.</p>`
+    },
+    {
+      question: "How can I add Masonite version compatibility ?",
+      answer: `
+      <p>You need to add version specifiers in <span class="highlight-tag">setup.py</span>, <span class="highlight-tag">pyproject.toml</span> or <span class="highlight-tag">setup.cfg</span> configuration file.</p>
+      <p>For example let's say your package is compatible with Masonite 4.0 and Masonite 4.1 you should add <span class="highlight-tag">Framework :: Masonite :: 4.0</span> and <span class="highlight-tag">Framework :: Masonite :: 4.1</span> specifiers.</p>
+      <p>Then it will be automatically displayed on the package details page.</p>
+      `
     },
     {
       question: "How can I create a package ?",

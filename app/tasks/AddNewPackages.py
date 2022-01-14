@@ -1,46 +1,38 @@
 """Task Module Description"""
-import requests
-
-from masonite.environment import env
 from masonite.scheduling import Task
 from masoniteorm.exceptions import QueryException
 
-from ..blacklist import REPOS_BLACKLIST
 from ..models.Package import Package
+from ..pypi import find_packages, get_package_data
 
 
 class AddNewPackages(Task):
-     def handle(self):
-        print("starting task !!!")
-        url = f"https://libraries.io/api/search?platforms=Pypi&keywords=Masonite,masonite&api_key={env('LIBRARIES_IO_API_KEY')}"
-        response = requests.get(url)
-        if response.status_code != 200:
-            print("ERROR: fetching packages failed !")
 
-        data = response.json()
-        for repo in data:
-            # avoid adding packages which are not
-            if repo["repository_url"] not in REPOS_BLACKLIST:
-                # add new packages only : done through unique flag
-                is_official = False
-                approved = False
-                if repo["repository_url"].startswith("https://github.com/MasoniteFramework/"):
-                    is_official = True
-                    approved = True
-                try:
-                    Package.create(
-                        name=repo["name"],
-                        short_description=repo["description"] or "N/A",
-                        description=repo["description"] or "N/A",
-                        homepage_url=repo["homepage"],
-                        repository_url=repo["repository_url"],
-                        version=repo["latest_stable_release_number"],
-                        pypi_url=repo["package_manager_url"],
-                        approved=approved,
-                        is_official=is_official,
-                        stars=repo["stars"]
-                    )
-                except QueryException:
-                    # UNIQUE
-                    pass
-        pass
+    def handle(self):
+        # get list of PyPi packages name with Masonite Framework classifier
+        packages = find_packages()
+
+        new_packages = 0
+        for package_name in packages:
+            # get additional data for the package
+            data = get_package_data(package_name)
+            if not data:
+                print("ERROR: fetching additional packages details failed !")
+                continue
+
+            approved = False
+            if data["repository_url"].startswith("https://github.com/MasoniteFramework/"):
+                approved = True
+            try:
+                Package.create(
+                    name=package_name,
+                    approved=approved,
+                    **data,
+                )
+            except QueryException as e:
+                if str(e) != "UNIQUE constraint failed: packages.name":
+                    print(f"ERROR: creating package : {e}")
+                continue
+            new_packages += 1
+
+        print(f"{new_packages} added !")

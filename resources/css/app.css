@@ -22,6 +22,19 @@
   @apply bg-green-100 text-green-800;
 }
 
+.badge-purple {
+  @apply bg-purple-100 text-purple-800;
+}
+
 .faq-link {
   @apply text-white underline;
+}
+
+/* disable highlight.js background and let typography tailwind plugin handle it */
+.readme .hljs {
+  background: transparent;
+}
+
+.highlight-tag {
+  @apply inline-block bg-gray-900 text-gray-400 text-sm px-1 rounded-md;
 }

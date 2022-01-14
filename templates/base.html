@@ -7,14 +7,15 @@
     <meta name="csrf-token" content="{{ csrf_token }}">
     <title>{% block title %}Masonite 4{% endblock %}</title>
     <link rel="shortcut icon" href="/favicon.ico">
+    <!-- and it's easy to individually load additional languages -->
     <link
       href="/assets/css/app.css"
       rel="stylesheet"
     />
     {% block head %}{% endblock %}
   </head>
-  <body>
-    <nav class="bg-gray-800" x-data="menu">
+  <body class="h-full bg-gray-800">
+    <nav x-data="menu">
       <div class="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
         <div class="relative flex items-center justify-between h-16">
           <div class="flex items-center px-2 lg:px-0">
@@ -24,31 +25,18 @@
               </div>
               <span class="font-medium text-lg text-white hidden lg:block ml-2">Masonite Packages</span>
             </a>
-            <div class="flex-1 flex justify-center px-2 lg:ml-6 lg:justify-end">
-              <div class="max-w-xl w-full lg:max-w-2xl">
-                <label for="search" class="sr-only">Search</label>
-                <div class="relative">
-                  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <!-- Heroicon name: solid/search -->
-                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                      aria-hidden="true">
-                      <path fill-rule="evenodd"
-                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                        clip-rule="evenodd" />
-                    </svg>
-                  </div>
-                  <input id="search" name="search"
-                    class="block w-full pl-10 pr-3 py-2 border border-transparent rounded-md leading-5 bg-gray-700 text-gray-300 placeholder-gray-400 focus:outline-none focus:bg-white focus:border-white focus:ring-white focus:text-gray-900 sm:text-sm"
-                    placeholder="Search" type="search">
-                </div>
-              </div>
-            </div>
           </div>
           <div class="hidden lg:block lg:ml-6">
-            <div class="flex space-x-4">
+            <div class="flex space-x-2">
               <a href="/packages" :class="isActive() && 'nav-link-active'" class="nav-link">Packages</a>
               <a href="/faq" :class="isActive() && 'nav-link-active'" class="nav-link">FAQ</a>
               <a href="https://docs.masoniteproject.com/" target="_blank" class="nav-link">Masonite Docs</a>
+              <a href="https://github.com/girardinsamuel/masonite-packages" target="_blank" class="nav-link">
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                  <path fill="currentColor"
+                    d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z" />
+                </svg>
+              </a>
             </div>
           </div>
           <div class="flex lg:hidden">
@@ -84,13 +72,17 @@
           <a href="/packages" :class="isActive() && 'nav-link-active'" class="nav-link block">Packages</a>
           <a href="/faq" :class="isActive() && 'nav-link-active'" class="nav-link block">FAQ</a>
           <a href="https://docs.masoniteproject.com/" target="_blank" class="nav-link block">Masonite Docs</a>
+          <a href="https://github.com/girardinsamuel/masonite-packages" target="_blank" class="nav-link">
+            <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+              <path fill="currentColor"
+                d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z" />
+            </svg>
+          </a>
         </div>
       </div>
     </nav>
-    <div class="h-screen bg-gray-800">
-      <div class="max-w-7xl pt-10 container px-20 mx-auto">
+    <div class="max-w-7xl pt-10 pb-10 container px-20 mx-auto">
       {% block content %}{% endblock %}
-      </div>
     </div>
     <script defer src="/assets/js/app.js"></script>
     {% block js %}{% endblock %}

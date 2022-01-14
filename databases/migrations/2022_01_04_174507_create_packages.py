@@ -12,14 +12,20 @@ class CreatePackages(Migration):
             table.increments("id")
             table.string("name").unique()
             table.string("short_description")
+            table.string("author")
+            table.string("author_email")
             table.long_text("description", nullable=True)
             table.boolean("is_official").default(False)
             table.boolean("is_approved").default(False)
+            table.boolean("unmaintained").default(False)
             table.string("version", length=15, nullable=True)
             table.string("pypi_url")
             table.string("repository_url")
-            table.string("homepage_url")
-            table.integer("stars")
+            table.string("license").default("N/A")
+            # TODO:: how to use enum ?
+            table.string("masonite_versions", nullable=True)
+            table.integer("stars").default(0)
+            table.integer("issues").default(0)
             table.timestamps()
 
     def down(self):

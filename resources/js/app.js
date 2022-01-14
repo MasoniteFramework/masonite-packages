@@ -7,6 +7,9 @@ window.Alpine = Alpine
 
 Alpine.plugin(collapse)
 
+Alpine.magic('clipboard', () => {
+  return subject => navigator.clipboard.writeText(subject)
+})
 
 // For navbar interactivity
 Alpine.data('menu', () => ({
