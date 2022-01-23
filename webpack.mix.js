@@ -5,11 +5,11 @@ const mix = require('laravel-mix')
 const path = require('path')
 
 
-mix.js('resources/js/app.js', 'app/storage/compiled/js')
-  .postCss('resources/css/app.css', 'app/storage/compiled/css', [
+mix.js('resources/js/app.js', 'storage/compiled/js')
+  .postCss('resources/css/app.css', 'storage/compiled/css', [
     require("tailwindcss")
   ])
-
+mix.setPublicPath(".")
 // add an alias to js code
 mix.alias({
   "@": path.resolve("resources/js/"),
