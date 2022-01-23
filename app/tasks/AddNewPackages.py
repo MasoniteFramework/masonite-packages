@@ -14,6 +14,9 @@ class AddNewPackages(Task):
 
         new_packages = 0
         for package_name in packages:
+            # if package already exists don't add it again
+            if Package.where("name", package_name).count() == 1:
+                continue
             # get additional data for the package
             data = get_package_data(package_name)
             if not data:
@@ -21,7 +24,7 @@ class AddNewPackages(Task):
                 continue
 
             approved = False
-            if data["repository_url"].startswith("https://github.com/MasoniteFramework/"):
+            if data["repository_url"].lower().startswith("https://github.com/masoniteframework/"):
                 approved = True
             try:
                 Package.create(
@@ -30,8 +33,7 @@ class AddNewPackages(Task):
                     **data,
                 )
             except QueryException as e:
-                if str(e) != "UNIQUE constraint failed: packages.name":
-                    print(f"ERROR: creating package : {e}")
+                print(f"ERROR: creating package : {e}")
                 continue
             new_packages += 1
 
