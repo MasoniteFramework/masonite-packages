@@ -14,7 +14,7 @@ class CreatePackages(Migration):
             table.string("short_description")
             table.string("author")
             table.string("author_email")
-            table.long_text("description", nullable=True)
+            table.text("description", nullable=True)
             table.boolean("is_official").default(False)
             table.boolean("disabled").default(False)
             table.boolean("unmaintained").default(False)
