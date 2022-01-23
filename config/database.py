@@ -13,7 +13,7 @@ DATABASES = {
     "default": env("DB_CONNECTION", "sqlite"),
     "sqlite": {
         "driver": "sqlite",
-        "database": env("SQLITE_DB_DATABASE", "masonite.sqlite3"),
+        "database": "masonite_packages.sqlite3",
         "prefix": "",
         "log_queries": env("DB_LOG"),
     },
@@ -32,16 +32,6 @@ DATABASES = {
         "log_queries": env("DB_LOG"),
     },
     "postgres": db_url(),
-    "mssql": {
-        "driver": "mssql",
-        "host": env("MSSQL_DATABASE_HOST"),
-        "user": env("MSSQL_DATABASE_USER"),
-        "password": env("MSSQL_DATABASE_PASSWORD"),
-        "database": env("MSSQL_DATABASE_DATABASE"),
-        "port": env("MSSQL_DATABASE_PORT"),
-        "prefix": "",
-        "log_queries": env("DB_LOG"),
-    },
 }
 
 DB = ConnectionResolver().set_connection_details(DATABASES)
