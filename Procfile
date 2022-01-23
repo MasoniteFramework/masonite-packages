@@ -1,2 +1,2 @@
 web: gunicorn wsgi:application
-release: python craft migrate --force
+release: ./release-tasks.sh
