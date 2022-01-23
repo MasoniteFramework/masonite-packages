@@ -16,7 +16,7 @@ class CreatePackages(Migration):
             table.string("author_email")
             table.long_text("description", nullable=True)
             table.boolean("is_official").default(False)
-            table.boolean("is_approved").default(False)
+            table.boolean("disabled").default(False)
             table.boolean("unmaintained").default(False)
             table.string("version", length=15, nullable=True)
             table.string("pypi_url")

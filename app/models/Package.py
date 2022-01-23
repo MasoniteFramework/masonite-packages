@@ -11,7 +11,7 @@ class Package(Model):
         "author_email",
         "short_description",
         "description",
-        "is_approved",
+        "disabled",
         "is_official",
         "repository_url",
         "homepage_url",

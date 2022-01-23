@@ -1,5 +1,6 @@
 from masonite.environment import LoadEnvironment, env
 from masoniteorm.connections import ConnectionResolver
+from masoniteorm.config import db_url
 
 #  Loads in the environment variables when this page is imported.
 LoadEnvironment()
@@ -30,17 +31,7 @@ DATABASES = {
         },
         "log_queries": env("DB_LOG"),
     },
-    "postgres": {
-        "driver": "postgres",
-        "host": env("DB_HOST"),
-        "user": env("DB_USERNAME"),
-        "password": env("DB_PASSWORD"),
-        "database": env("DB_DATABASE"),
-        "port": env("DB_PORT"),
-        "prefix": "",
-        "grammar": "postgres",
-        "log_queries": env("DB_LOG"),
-    },
+    "postgres": db_url(),
     "mssql": {
         "driver": "mssql",
         "host": env("MSSQL_DATABASE_HOST"),
