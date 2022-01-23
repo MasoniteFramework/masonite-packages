@@ -14,7 +14,6 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "heroku-postbuild": "npm run production",
         "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000"
     },
