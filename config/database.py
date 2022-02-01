@@ -17,20 +17,7 @@ DATABASES = {
         "prefix": "",
         "log_queries": env("DB_LOG"),
     },
-    "mysql": {
-        "driver": "mysql",
-        "host": env("DB_HOST"),
-        "user": env("DB_USERNAME"),
-        "password": env("DB_PASSWORD"),
-        "database": env("DB_DATABASE"),
-        "port": env("DB_PORT"),
-        "prefix": "",
-        "grammar": "mysql",
-        "options": {
-            "charset": "utf8mb4",
-        },
-        "log_queries": env("DB_LOG"),
-    },
+    "mysql": db_url(),
     "postgres": db_url(),
 }
 
