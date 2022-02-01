@@ -1,0 +1,8 @@
+{
+  "cron": [
+    {
+      "command": "python craft schedule:run",
+      "schedule": "@daily"
+    }
+  ]
+}
