@@ -108,7 +108,7 @@ def get_package_data(package_name):
     masonite_versions = ",".join(masonite_versions)
 
     is_official=False
-    if data["home_page"].startswith("https://github.com/MasoniteFramework/"):
+    if data["home_page"].lower().startswith("https://github.com/masoniteframework/"):
         is_official=True
 
     return {

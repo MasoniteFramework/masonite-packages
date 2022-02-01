@@ -23,13 +23,9 @@ class AddNewPackages(Task):
                 print("ERROR: fetching additional packages details failed !")
                 continue
 
-            approved = False
-            if data["repository_url"].lower().startswith("https://github.com/masoniteframework/"):
-                approved = True
             try:
                 Package.create(
                     name=package_name,
-                    approved=approved,
                     **data,
                 )
             except QueryException as e:
