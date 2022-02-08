@@ -3,16 +3,16 @@
 
 {% block content %}
 <div class="flex flex-col items-center justify-center pt-10">
-  <h1 class="text-white text-5xl mb-4 tracking-wide">
+  <h1 class="text-white text-center text-5xl mb-4 tracking-wide">
     Find the Best Masonite Packages
   </h1>
-  <p class="text-gray-500 text-lg">Don't loose time recoding the community already covered.</p>
+  <p class="text-gray-500 text-center text-lg">Don't loose time recoding the community already covered.</p>
 
   {% include "search.html" %}
 
   <div class="w-full">
     <h2 class="text-white mb-6 text-lg">Last added packages</h2>
-    <div class="grid grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {% for package in last_packages %}
           {% include "package_card.html" %}
         {% endfor %}
