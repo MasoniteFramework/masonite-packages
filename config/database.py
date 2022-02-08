@@ -17,7 +17,7 @@ DATABASES = {
         "prefix": "",
         "log_queries": env("DB_LOG"),
     },
-    "mysql": db_url(),
+    "mysql": db_url(options={"charset": "utf8mb4"}),
     "postgres": db_url(),
 }
 
