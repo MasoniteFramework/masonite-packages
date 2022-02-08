@@ -19,10 +19,3 @@ class Package(Model):
         "stars",
         "version"
     ]
-
-    __append__ = ["last_update"]
-
-    @property
-    def last_update(self):
-        return self.updated_at.to_datetime_string()
-

@@ -78,10 +78,13 @@
     {{ package.description | safe }}
   </div>
   <p class="text-gray-500 mt-6 text-sm text-left">
-    Last update at {{ package.last_update }}
+    Last update: <span id="last_updated_at"></span>
   </p>
 </div>
 
 
-<script>hljs.highlightAll();</script>
+<script>
+  hljs.highlightAll();
+  document.getElementById("last_updated_at").textContent = new Date("{{ package.updated_at }}").toLocaleString()
+</script>
 {% endblock %}
