@@ -1,8 +1,0 @@
-{
-  "cron": [
-    {
-      "command": "python craft schedule:run",
-      "schedule": "0 10 * * *"
-    }
-  ]
-}
